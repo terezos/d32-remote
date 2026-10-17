@@ -19,6 +19,7 @@ class VolumeKeyService : AccessibilityService() {
 
     override fun onAccessibilityEvent(e: AccessibilityEvent?) {
         if (e == null || e.eventType != AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED) return
+        if (!D32.connected) D32Service.start(this)      // αν σταμάτησε για οποιονδήποτε λόγο, ξεκίνα ξανά
         if (e.className?.toString()?.contains("Toast") != true) return
         if (e.packageName?.toString() != "com.android.systemui") return
         if (!D32.enabled || !D32.connected) return

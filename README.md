@@ -8,12 +8,10 @@ D32 Remote is a small Android TV app that fixes that:
 
 ```
 TV remote ──► Google TV ──► D32 Remote ──BLE──► Edifier D32
-iPhone / browser ──HTTP:8080──┘
 ```
 
 - **TV remote Vol+ / Vol− / Mute** move the D32 volume (0–16)
 - A clean on-screen volume bar that **covers TCL's "optical fibers" message**
-- **HTTP API** on port 8080 for iPhone Shortcuts, widgets, Siri, Home automations
 - Starts on boot, reconnects automatically, no extra hardware
 
 Tested on a **TCL 65P8K** (Google TV, Android 14).
@@ -52,29 +50,9 @@ So the app:
 
 To remove: `./scripts/uninstall.command`, or *Settings → Apps → D32 Remote → Uninstall* on the TV.
 
-## HTTP API
-
-| Endpoint | Action |
-|---|---|
-| `GET /` | simple web remote (− / mute / +) |
-| `GET /vol/up`, `/vol/down` | ±1 step |
-| `GET /vol/set?v=8` | absolute volume 0–16 |
-| `GET /mute` | toggle mute |
-| `GET /status` | JSON status |
-| `GET /enable`, `/disable` | turn TV-remote control on/off |
-
-Example response:
-```json
-{"ok":true,"connected":true,"volume":6,"max":16,"enabled":true,"status":"Συνδεδεμένο"}
-```
-
-**iPhone:** Shortcuts → *Get Contents of URL* → `http://<tv-ip>:8080/vol/up`. Add it to a widget, Control Center or the Action Button. Give the TV a fixed IP (DHCP reservation) on your router.
-
-> The API has no authentication — keep it on your home LAN.
-
 ## Pause / disable
 
-Open **D32 Remote** on the TV → **⏸ Pause** (or call `/disable`). The TV remote then behaves as before.
+Open **D32 Remote** on the TV → **⏸ Pause**. The TV remote then behaves as before.
 
 ## Repository
 

@@ -22,9 +22,13 @@ class TvVolumeWatcher(private val ctx: Context) {
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(c: Context, i: Intent) {
-            when (i.action) {
-                VOLUME_CHANGED -> onVolume(i)
-                MUTE_CHANGED -> onMute(i)
+            try {
+                when (i.action) {
+                    VOLUME_CHANGED -> onVolume(i)
+                    MUTE_CHANGED -> onMute(i)
+                }
+            } catch (_: Exception) {
+                // ποτέ crash από ένα πάτημα
             }
         }
     }

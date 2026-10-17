@@ -10,9 +10,8 @@ import android.content.pm.ServiceInfo
 import android.os.Build
 import android.os.IBinder
 
-/** Foreground service: κρατάει τη BLE σύνδεση και τον HTTP server ζωντανούς. */
+/** Foreground service: κρατάει τη BLE σύνδεση και τον watcher της έντασης ζωντανούς. */
 class D32Service : Service() {
-    private val http = HttpServer(8080)
     private var watcher: TvVolumeWatcher? = null
 
     override fun onCreate() {
@@ -35,7 +34,6 @@ class D32Service : Service() {
 
         D32.init(this)
         D32.start()
-        http.start()
         watcher = TvVolumeWatcher(this).also { it.start() }
     }
 
@@ -46,7 +44,6 @@ class D32Service : Service() {
 
     override fun onDestroy() {
         watcher?.stop()
-        http.stop()
         D32.stop()
         super.onDestroy()
     }

@@ -61,6 +61,4 @@ else
   print "Στην TV: Settings → System → Accessibility → D32 Remote → OFF και ON. Μετά Enter."; read
 fi
 
-say "Κατάσταση"
-curl -s --max-time 5 "http://$TV_IP:8080/status"; echo
 say "Έτοιμο. Δοκίμασε τα κουμπιά έντασης του τηλεχειριστηρίου."

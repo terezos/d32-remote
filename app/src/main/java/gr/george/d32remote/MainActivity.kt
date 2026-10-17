@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -17,7 +16,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import java.net.Inet4Address
 
 /** Οθόνη ρύθμισης/κατάστασης. Χωρίς XML layouts, για να μείνει το project μικρό. */
 class MainActivity : Activity() {
@@ -90,8 +88,7 @@ class MainActivity : Activity() {
             appendLine("Άδειες Bluetooth: ${if (hasPerms()) "✅" else "❌"}")
             appendLine("Τηλεχειριστήριο (Accessibility): ${if (a11yOn()) "✅" else "❌ ενεργοποίησέ το"}")
             appendLine()
-            appendLine("Από iPhone / browser:  http://${ip() ?: "?"}:8080")
-            append("Endpoints: /vol/up  /vol/down  /mute  /vol/set?v=8  /status  /enable  /disable")
+            append("Χρησιμοποίησε τα κουμπιά έντασης του τηλεχειριστηρίου.")
         }
         toggle?.text = if (D32.enabled) "⏸ Παύση" else "▶ Ενεργοποίηση"
         ui.removeCallbacksAndMessages(null)
@@ -107,11 +104,6 @@ class MainActivity : Activity() {
         return split.any { it.equals(me, true) || it.equals("$packageName/.VolumeKeyService", true) }
     }
 
-    private fun ip(): String? {
-        val cm = getSystemService(ConnectivityManager::class.java)
-        val lp = cm.getLinkProperties(cm.activeNetwork) ?: return null
-        return lp.linkAddresses.map { it.address }.firstOrNull { it is Inet4Address }?.hostAddress
-    }
 
     private fun row(parent: LinearLayout) = LinearLayout(this).apply {
         orientation = LinearLayout.HORIZONTAL
