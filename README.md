@@ -62,6 +62,7 @@ scripts/             install / uninstall helpers (macOS, zsh)
 tools/d32_probe.py   BLE probe for macOS/Linux (bleak) — scan, read and set volume
 esp32/               alternative: ESP32 bridge exposing the D32 to Apple HomeKit (HomeSpan)
 docs/PROTOCOL.md     Edifier D32 BLE protocol
+docs/OVERVIEW.md     full project documentation (Greek)
 ```
 
 ### Probe the speaker from a computer
